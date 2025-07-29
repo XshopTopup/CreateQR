@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dokumentasi API QRIS Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 2rem auto; line-height: 1.6; }
+    h1, h2, h3 { color: #2c3e50; }
+    code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 6px; overflow-x: auto; }
+    .endpoint { background: #e8f6ff; padding: 6px 10px; border-left: 4px solid #3498db; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+
+<h1>📘 Dokumentasi API QRIS Generator</h1>
+
+<p>API ini digunakan untuk menghasilkan QR Code QRIS dinamis berdasarkan nominal transaksi.</p>
+
+<hr>
+
+<h2>🔐 Autentikasi</h2>
+<p>Tidak diperlukan autentikasi untuk endpoint ini.</p>
+
+<hr>
+
+<h2>📌 Endpoint</h2>
+
+<div class="endpoint">
+  <strong>POST</strong> <code>/api/generate</code>
+</div>
+
+<h3>Deskripsi:</h3>
+<p>Generate QR code QRIS dengan jumlah nominal tertentu. Hasil berupa URL gambar QR yang dapat langsung digunakan.</p>
+
+<h3>Request Body (JSON):</h3>
+<pre>{
+  "amount": 10000
+}</pre>
+
+<h3>Response (200):</h3>
+<pre>{
+  "qris": "https://yourdomain.com/qris/QR1690645589651.jpg"
+}</pre>
+
+<h3>Response (400):</h3>
+<pre>{
+  "error": "Invalid amount"
+}</pre>
+
+<h3>Response (500):</h3>
+<pre>{
+  "error": "Failed to generate QRIS"
+}</pre>
+
+<hr>
+
+<div class="endpoint">
+  <strong>GET</strong> <code>/qris/:filename</code>
+</div>
+
+<h3>Deskripsi:</h3>
+<p>Mengambil file QRIS (.jpg) dari folder <code>/tmp</code>.</p>
+
+<h3>Contoh URL:</h3>
+<pre>GET /qris/QR1690645589651.jpg</pre>
+
+<h3>Response:</h3>
+<p>File image QRIS (.jpg).</p>
+
+<h3>Response (404):</h3>
+<pre>File not found</pre>
+
+<hr>
+
+<h2>🧹 Pembersihan Otomatis</h2>
+<p>File QRIS yang telah dibuat akan otomatis dihapus setelah <strong>30 menit</strong> sejak dibuat.</p>
+
+<hr>
+
+<h2>💡 Catatan Tambahan</h2>
+<ul>
+  <li>Gunakan URL yang dikembalikan untuk ditampilkan langsung di aplikasi/web kamu.</li>
+  <li>File QR disimpan sementara di folder <code>/tmp</code>.</li>
+</ul>
+
+</body>
+</html>
